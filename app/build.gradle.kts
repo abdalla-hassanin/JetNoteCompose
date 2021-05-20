@@ -47,28 +47,27 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.core:core-ktx:1.3.2")
-    implementation ("androidx.appcompat:appcompat:1.2.0")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation ("androidx.compose.runtime:runtime-livedata:1.0.0-beta07")
+    implementation("androidx.core:core-ktx:1.5.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta07")
 
 
     // Compose UI
-    implementation ("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     // Material Design
-    implementation ("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
     // Tooling support (Previews, etc.)
-    implementation ("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
     // Integration with activities
-    implementation ("androidx.activity:activity-compose:1.3.0-alpha08")
+    implementation("androidx.activity:activity-compose:1.3.0-alpha08")
     // Material design icons
-    implementation ("androidx.compose.material:material-icons-extended:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.material:material-icons-extended:${rootProject.extra["compose_version"]}")
     // Jetpack Compose Integration
-    implementation ("androidx.navigation:navigation-compose:2.4.0-alpha01")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha01")
     //Room Database
-    kapt ("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
-    implementation ("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+    kapt("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+    implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
 
     //Test
     testImplementation("junit:junit:4.13.2")
