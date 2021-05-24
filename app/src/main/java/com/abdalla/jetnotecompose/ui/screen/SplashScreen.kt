@@ -18,19 +18,19 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(navController: NavController) {
-    Box(modifier = Modifier.background(Color.Black)) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
+    Box(
+        modifier = Modifier
+            .background(Color.Black)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
             Image(
                 painter = painterResource(id = R.drawable.charles_deluvio_yjys2an6v0i_unsplash),
                 contentDescription = null,
                 contentScale = ContentScale.Fit
             )
         }
-    }
+
     LaunchedEffect(true) { // Here, You need to use LaunchedEffect instead of Handle otherwise there will be an error
         delay(3000)
         navController.navigate(ScreenName.MAINSCREEN.screenName) {

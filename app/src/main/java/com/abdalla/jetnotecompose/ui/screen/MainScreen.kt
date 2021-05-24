@@ -40,7 +40,7 @@ fun MainScreen(navController: NavController, noteViewModel: NoteViewModel, conte
     val getAllNotes by noteViewModel.getAllNotes.observeAsState()
     Scaffold(
         scaffoldState = scaffoldState,
-//        topBar = { TopBar() },
+        topBar = { TopBar() },
         content = { getAllNotes?.let { ContentBody(it, noteViewModel, context) } },
         floatingActionButton = { FloatingButton(navController) }
     )
