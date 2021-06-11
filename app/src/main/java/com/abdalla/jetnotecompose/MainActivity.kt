@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,7 +19,10 @@ import com.abdalla.jetnotecompose.ui.screen.AddNewNote
 import com.abdalla.jetnotecompose.ui.screen.MainScreen
 import com.abdalla.jetnotecompose.ui.screen.SplashScreen
 import com.abdalla.jetnotecompose.ui.theme.MyNoteTheme
-import com.abdalla.jetnotecompose.utlis.ScreenName
+import com.abdalla.jetnotecompose.utlis.Actions
+import com.abdalla.jetnotecompose.utlis.Destinations.AddNewNote
+import com.abdalla.jetnotecompose.utlis.Destinations.Main
+import com.abdalla.jetnotecompose.utlis.Destinations.Splash
 
 class MainActivity : ComponentActivity() {
     private val noteViewModel: NoteViewModel by viewModels {
@@ -40,9 +44,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(noteViewModel: NoteViewModel, context:Context) {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = ScreenName.SPLASHSCREEN.screenName) {
-        composable(ScreenName.SPLASHSCREEN.screenName) { SplashScreen(navController) }
-        composable(ScreenName.MAINSCREEN.screenName) { MainScreen(navController, noteViewModel,context) }
-        composable(ScreenName.ADDNEWNOTE.screenName) { AddNewNote(navController, noteViewModel) }
+    val action = remember(navController) { Actions(navController) }
+    NavHost(navController, startDestination = Splash) {
+        composable(Splash) { SplashScreen(action.popUpToSplash) }
+        composable(Main) { MainScreen(action.openAddNewNote, noteViewModel,context) }
+        composable(AddNewNote) { AddNewNote(action.navigationUp, noteViewModel) }
     }
 }

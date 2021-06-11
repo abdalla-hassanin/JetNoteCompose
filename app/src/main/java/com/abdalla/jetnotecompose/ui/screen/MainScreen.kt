@@ -28,21 +28,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
 import com.abdalla.jetnotecompose.R
 import com.abdalla.jetnotecompose.database.model.Note
 import com.abdalla.jetnotecompose.database.viewModel.NoteViewModel
-import com.abdalla.jetnotecompose.utlis.ScreenName
 
 @Composable
-fun MainScreen(navController: NavController, noteViewModel: NoteViewModel, context: Context) {
+fun MainScreen(openAddNewNote: () -> Unit, noteViewModel: NoteViewModel, context: Context) {
     val scaffoldState = rememberScaffoldState()
     val getAllNotes by noteViewModel.getAllNotes.observeAsState()
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = { TopBar() },
         content = { getAllNotes?.let { ContentBody(it, noteViewModel, context) } },
-        floatingActionButton = { FloatingButton(navController) }
+        floatingActionButton = { FloatingButton(openAddNewNote) }
     )
 
 }
@@ -71,9 +69,9 @@ private fun TopBar() {
 }
 
 @Composable
-private fun FloatingButton(navController: NavController) {
+private fun FloatingButton(openAddNewNote: () -> Unit) {
     FloatingActionButton(onClick = {
-        navController.navigate(ScreenName.ADDNEWNOTE.screenName)
+        openAddNewNote()
     }) {
         Icon(
             imageVector = Icons.Default.NoteAdd,

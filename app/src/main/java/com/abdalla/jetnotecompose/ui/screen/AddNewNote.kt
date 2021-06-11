@@ -18,24 +18,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.abdalla.jetnotecompose.database.model.Note
 import com.abdalla.jetnotecompose.database.viewModel.NoteViewModel
-import com.abdalla.jetnotecompose.utlis.ScreenName
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AddNewNote(navController: NavController, noteViewModel: NoteViewModel) {
+fun AddNewNote(navigationUp: () -> Unit, noteViewModel: NoteViewModel) {
     val noteContent = remember { mutableStateOf(TextFieldValue()) }
     val noteTitle = remember { mutableStateOf(TextFieldValue()) }
     val snackBarVisibleState = remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
-            TopBar(navController, noteContent, noteTitle, noteViewModel, snackBarVisibleState)
+            TopBar(navigationUp, noteContent, noteTitle, noteViewModel, snackBarVisibleState)
         },
         content = { ContentBody(noteContent, noteTitle) },
         snackbarHost = {
@@ -52,7 +50,7 @@ fun AddNewNote(navController: NavController, noteViewModel: NoteViewModel) {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun TopBar(
-    navController: NavController,
+    navigationUp: () -> Unit,
     noteContent: MutableState<TextFieldValue>,
     noteTitle: MutableState<TextFieldValue>,
     noteViewModel: NoteViewModel,
@@ -81,12 +79,7 @@ private fun TopBar(
                                         )
                                     )
                                 )
-
-                                navController.navigate(ScreenName.MAINSCREEN.screenName) {
-                                    popUpTo(ScreenName.ADDNEWNOTE.screenName) {//delete
-                                        inclusive = true //close stack
-                                    }
-                                }
+                                navigationUp()
                             } else {
                                 snackBarVisibleState.value = true
                             }
@@ -95,11 +88,7 @@ private fun TopBar(
         },
         navigationIcon = {
             IconButton(onClick = {
-                navController.navigate(ScreenName.MAINSCREEN.screenName) {
-                    popUpTo(ScreenName.ADDNEWNOTE.screenName) {//delete
-                        inclusive = true //close stack
-                    }
-                }
+                navigationUp()
             }) {
                 Icon(Icons.Rounded.ArrowBack, contentDescription = null)
             }
