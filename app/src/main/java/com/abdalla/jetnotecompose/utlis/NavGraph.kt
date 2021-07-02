@@ -1,5 +1,6 @@
 package com.abdalla.jetnotecompose.utlis
 
+
 import androidx.navigation.NavController
 import com.abdalla.jetnotecompose.utlis.Destinations.AddNewNote
 import com.abdalla.jetnotecompose.utlis.Destinations.Main
